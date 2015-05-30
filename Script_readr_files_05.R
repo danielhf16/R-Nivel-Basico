@@ -7,7 +7,7 @@
 
 ##--------- 1. working directory wd
 # setear wd
-wd0 <- "C:/Users/Toshiba/Desktop/readr_files_05"
+wd0 <- "/Users/usuario/Documents/R-Nivel-Basico"
 setwd(dir = wd0)
 
 # obtencion de wd
@@ -17,23 +17,23 @@ getwd()
 list.files()
 list.files(pattern = ".Rmd")
 
-wd1 <- "C:/Users/Toshiba/Desktop/readr_files_05/read_data"
+wd1 <- "/Users/usuario/Documents/R-Nivel-Basico/read_data"
 setwd(dir = wd1)
-list.files()
 list.files(pattern = ".txt")
+getwd() 
 
 files <- list.files()
 files
-grep(files, pattern = ".txt")
+grep(files, pattern = ".txt") #busca las coincidencia de un determinado patron
 files[grep(files,pattern = ".txt")]
 
 # crear nuevos directorios
 setwd(dir = wd0)
 file.exists("ssl")
-dir.create("ssl")
+dir.create("ssl") #crear una carpeta 
 
 ##--------- 2. read files
-setwd(wd1)
+setwd(wd1) #************* es mas rapido
 list.files()
 # read.table function
 # archivo formato txt
@@ -47,11 +47,11 @@ dim(data_txt1)
 ncol(data_txt1)
 nrow(data_txt1)
 
-summary(data_txt1)
+summary(data_txt1) #resumen estadistico
 
 # Variables categóricas como character
 data_txt2 <- read.table(file = "data_read.txt",sep = "\t", dec = ",", 
-                       header = TRUE, stringsAsFactors = FALSE)
+                       header = TRUE, stringsAsFactors = FALSE) # string es para convertir en factores
 str(data_txt2)
 
 
@@ -79,7 +79,7 @@ str(data_csv2)
 # archivo formato xlsx
 # install.packages("readxl", dependencies = TRUE)
 library(readxl)
-ls("package:readxl")
+ls("package:readxl") #listabtodas las funciones 
 # lista de las hojas del libro "data_read.xlsx"
 excel_sheets(path = file.path(wd1, "data_read.xlsx"))
 
@@ -92,8 +92,8 @@ str(data_xlsx)
 # install.packages("foreign", dependencies = TRUE)
 library(foreign)
 ls("package:foreign")
-system.time(data_sav1 <- read.spss("data_read.sav", use.value.labels = TRUE, 
-                      to.data.frame = TRUE))
+(data_sav1 <- read.spss("data_read.sav", use.value.labels = TRUE, 
+                 to.data.frame = TRUE))
 str(data_sav1)
 
 
@@ -127,9 +127,9 @@ library(XML)
 # install.packages("RCurl", dependencies = TRUE)
 # install.packages("XML", dependencies = TRUE)
 # http://www.sbs.gob.ec/practg/sbs_index?vp_art_id=&vp_tip=6&vp_buscr=/practg/pk_cons_bdd.p_bal_entdd_finnc
-cod_inst=1028
-cod_mes=11
-cod_anio=2010
+cod_inst<-1028
+cod_mes<-11
+cod_anio<-2010
 base_url <- paste('http://www.sbs.gob.ec/practg/pk_cons_bdd.p_bal_entdd_finnc?vp_cod_tip_instt=3&vp_cod_instt=',
                   cod_inst,'&vp_anio=', cod_anio, '&vp_mes=', cod_mes, '&vp_cod_tip_catlg=14')
 table_url <- readHTMLTable(base_url)
@@ -165,7 +165,7 @@ summary(data_txt1)
 
 #---------------------------- Variable numerica ---------------------
 edad <- data_txt[,2]
-edad <- data_txt[,"Edad"]
+(edad <- data_txt[,"Edad"])
 str(edad)
 View(edad)
 typeof(edad)
@@ -180,7 +180,7 @@ is.numeric(edad)
 is.list(edad)
 
 # obtener los elementos 5, 8, 10 de edad y asignar a edad1
-edad1 <- edad[c(5,8,10)]
+(edad1 <- edad[c(5,8,10)])
 length(edad1)
 
 # obtener los 50 primeros elementos de edad y asignar a edad1
@@ -195,7 +195,7 @@ edad1 <- edad[-c(1,25,51)]
 length(edad)
 length(edad1)
 # eliminar los primeros 1000 elementos de edad y asignar a edad1
-edad1 <- edad[-c(1,25,51)]
+edad1 <- edad[-(1:100)]
 length(edad)
 length(edad1)
 
